@@ -1,0 +1,53 @@
+from flask import Flask, render_template, send_from_directory, abort, json
+
+app = Flask(__name__, template_folder='')
+
+# --- Список категорій меню ---
+CATEGORIES = [
+    'Піца', 'Круасани', 'Бургер', 'Шаурма', 'Лаваш',
+    'Салати', 'Перші страви', 'Вареники', 'Гофра',
+    'Гарніри', 'Десерти та напої'
+]
+
+# --- Головна сторінка ---
+@app.route('/rif-caffe/')
+def index():
+    return render_template('index.html', categories=CATEGORIES)
+
+# --- Віддаємо статичні файли (щоб не міняти HTML) ---
+@app.route('/rif-caffe/css/<path:filename>')
+def serve_css(filename):
+    return send_from_directory('css', filename)
+
+@app.route('/rif-caffe/images/<path:filename>')
+def serve_images(filename):
+    return send_from_directory('images', filename)
+
+@app.route('/rif-caffe/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('', filename)
+
+# --- Сторінка категорії ---
+@app.route('/rif-caffe/menu/<category>/')
+def menu_category(category):
+    data = load_menu()
+
+    # Знаходимо категорію без урахування регістру
+    matched = next((k for k in data.keys() if k.lower() == category.lower()), None)
+    if not matched:
+        abort(404)
+
+    dishes = data[matched]
+
+    # Перетворюємо шлях до іконки на фактичний
+    for dish in dishes:
+        dish['icon_path'] = f"images/{dish['назва_іконки_до_неї']}"
+
+    return render_template('menu.html', category=matched, dishes=dishes)
+
+def load_menu():
+    with open('menu.json', 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+if __name__ == '__main__':
+    app.run(debug=True)

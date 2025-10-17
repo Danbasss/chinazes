@@ -1,0 +1,123 @@
+# ------------------------------------------
+# Python byte-compiled/interpreted files
+# ------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ------------------------------------------
+# Virtual Environments & Environment Files
+# ------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+env.old/
+*.env
+*.venv
+Pipfile.lock
+
+# ------------------------------------------
+# Package/Binary Artifacts
+# ------------------------------------------
+build/
+dist/
+wheelhouse/
+*.egg-info/
+*.egg
+*.whl
+
+# ------------------------------------------
+# Installer Logs
+# ------------------------------------------
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ------------------------------------------
+# Python Notebook Caches
+# ------------------------------------------
+.ipynb_checkpoints/
+
+# ------------------------------------------
+# Test & Coverage
+# ------------------------------------------
+.coverage
+.coverage.*
+.cache
+.tox/
+.nox/
+pytest_cache/
+
+# ------------------------------------------
+# Documentation Builds
+# ------------------------------------------
+docs/_build/
+site/
+build-docs/
+*.rst~
+*.md~
+
+# ------------------------------------------
+# Logs & Databases
+# ------------------------------------------
+*.log
+*.sqlite
+*.db
+
+# ------------------------------------------
+# OS & Editor/IDE Files
+# ------------------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+*~
+
+# IntelliJ / PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# Vim temporary files
+*.un~
+
+# Mac file
+._*
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# JetBrains caching
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+profiling/
+
+# ------------------------------------------
+# Other Tooling and CI
+# ------------------------------------------
+.hypothesis/
+.coverage.*
+.pytest_cache/
+node_modules/
+
+*.pt
+
+# ------------------------------------------
+# Output frames folder
+# ------------------------------------------
+output_frames/
+
+# ------------------------------------------
+# Large directories
+# ------------------------------------------
+model/

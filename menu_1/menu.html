@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ category }} — Монастирська кав’ярня-пекарня</title>
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #3b2213;
+    color: #fff;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #432a21;
+    padding: 10px 20px;
+}
+
+header .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .logo-container img {
+    height: 40px;
+}
+
+header .logo-container a, header .logo-container span {
+    color: #f5b76b;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header .menu-btn {
+    background-color: #5b3521;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+}
+
+/* Dropdown menu */
+header .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 45px;
+    background-color: #5b3521;
+    min-width: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+header .dropdown a {
+    display: block;
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+header .dropdown a:hover {
+    background-color: #6b462d;
+}
+
+/* Menu button hover toggle */
+header .menu-btn:hover + .dropdown,
+header .dropdown:hover {
+    display: block;
+}
+
+/* Category title */
+.category-title {
+    background-color: #5b3521;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Dish grid */
+.dish-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Dish card */
+.dish-card {
+    display: flex;
+    background-color: #432a21;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    gap: 15px;
+}
+
+.dish-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.dish-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dish-info h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.dish-info .weight {
+    font-size: 14px;
+    color: #d1a77a;
+}
+
+.dish-info .price {
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+.dish-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #432a21;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <a href="/rif-caffe/"><img src="/images/mif.png" alt="Лого"></a>
+        <span><a href="/rif-caffe/">Монастирська кав’ярня-пекарня</a></span>
+    </div>
+    <div>
+        <button class="menu-btn">Меню</button>
+        <div class="dropdown">
+            {% for s in sections %}
+            <a href="{{ url_for('menu_category', category=s) }}">{{ s }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</header>
+
+<div class="category-title">{{ category }}</div>
+
+<main>
+    <div class="dish-grid">
+        {% for dish in dishes %}
+        <div class="dish-card">
+            <img src="{{ dish.icon_path }}" alt="{{ dish['назва_їжі'] }}">
+            <div class="dish-info">
+                <h3>{{ dish['назва_їжі'] }}</h3>
+                <span class="weight">({{ dish.get('вага', '') }})</span>
+                <span class="price">{{ dish['ціна'] }} грн</span>
+                <p>{{ dish['опис_інгредієнтів'] }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+<footer>
+    <a href="/rif-caffe/">⬅ На головну</a>
+</footer>
+
+</body>
+</html>
