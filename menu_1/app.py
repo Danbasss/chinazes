@@ -4,10 +4,17 @@ app = Flask(__name__, template_folder='')
 
 # --- Список категорій меню ---
 CATEGORIES = [
-    'Піца', 'Круасани', 'Бургер', 'Шаурма', 'Лаваш',
+    'Піца', 'Круасани', 'Бургер', 'Лаваш',
     'Салати', 'Перші страви', 'Вареники', 'Гофра',
     'Гарніри', 'Десерти та напої'
 ]
+
+BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png', 
+         'BACKGROUNDBURGER.png', 'BACKGROUNDSHAWARMA.png', 
+         'BACKGROUNDSHAWARMA.png', 'BACKGROUNDSALAD.png', 
+         'BACKGROUNDSOUP.png', 'BACKGROUNDDUMPLING.png', 
+         'BACKGROUNDGOFRA.png', 'BACKGROUNDSIDEDISHES.png', 
+         'BACKGROUNDDESSERTS.png']
 
 # --- Головна сторінка ---
 @app.route('/rif-caffe/')
@@ -43,7 +50,11 @@ def menu_category(category):
     for dish in dishes:
         dish['icon_path'] = f"images/{dish['назва_іконки_до_неї']}"
 
-    return render_template('menu.html', category=matched, dishes=dishes)
+    back_photo_true_path = list(BACK_PHOTOS)
+    for n in range(len(back_photo_true_path)):
+        back_photo_true_path[n] = f"images/{back_photo_true_path[n]}"
+
+    return render_template('menu.html', category=matched, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
 
 def load_menu():
     with open('menu.json', 'r', encoding='utf-8') as f:

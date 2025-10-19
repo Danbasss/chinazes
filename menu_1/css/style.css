@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background-color: #4b2b16;
+  background-color: #3b2213;
   color: #fff;
   text-align: center;
 }
@@ -9,19 +9,44 @@ body {
 /* ---------- Header ---------- */
 header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
   padding: 10px 20px;
-  background-color: #2d1b0f;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.1s ease, backdrop-filter 0.1s ease;
+  background-color: transparent;
+  backdrop-filter: none;
 }
 
-.logo {
-  height: 40px;
-  margin-right: 10px;
+header.scrolled {
+  background-color: rgba(28, 28, 28, 1); /* непрозорий темний фон */
+  backdrop-filter: blur(6px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    height: 40px;
+}
+
+.logo-container a, header .logo-container span {
+    color: #f5b76b;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
 }
 
 /* ---------- Hero section ---------- */
 .hero {
-  background-image: url("images\BACKGROUND.png");
+  background-image: url("../images/BACKGROUND.png");
   background-size: cover;
   background-position: center;
   height: 200px;
@@ -32,7 +57,7 @@ header {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
   display: flex;
   align-items: center;
   justify-content: center;

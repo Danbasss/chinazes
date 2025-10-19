@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{{ category }} — Монастирська кав’ярня-пекарня</title>
 <link rel="stylesheet" href="../../css/style.css">
+<base href="/rif-caffe/">
 <style>
 body {
     margin: 0;
@@ -15,64 +16,89 @@ body {
 
 /* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #432a21;
-    padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.1s ease, backdrop-filter 0.1s ease;
+  background-color: transparent;
+  backdrop-filter: none;
 }
 
-header .logo-container {
+header.scrolled {
+  background-color: rgba(28, 28, 28, 1); /* непрозорий темний фон */
+  backdrop-filter: blur(6px);
+}
+
+.logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-header .logo-container img {
+.logo-container img {
     height: 40px;
 }
 
-header .logo-container a, header .logo-container span {
+.logo-container a, header .logo-container span {
     color: #f5b76b;
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
 }
 
-header .menu-btn {
+.menu-container {
+    position: relative; /* важливо! робить контейнер точкою відліку для absolute меню */
+    display: inline-block; /* щоб ширина відповідала кнопці */
+}
+
+.menu-btn {
     background-color: #5b3521;
     border: none;
-    padding: 10px 15px;
+    padding: 8px 12px;
     cursor: pointer;
     color: #fff;
     font-weight: bold;
     position: relative;
 }
 
-/* Dropdown menu */
-header .dropdown {
+/* === DROPDOWN === */
+.dropdown {
     display: none;
     position: absolute;
-    right: 0;
-    top: 45px;
-    background-color: #5b3521;
-    min-width: 200px;
-    border-radius: 5px;
-    overflow: hidden;
-    z-index: 100;
+    top: 100%;    /* прямо під кнопкою */
+    left: 0;      /* вирівнювання лівого краю меню по кнопці */
+    background: #1c1c1c;
+    min-width: 160px; /* мінімальна ширина випадаючого списку */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* легка тінь */
+    z-index: 1000;   /* щоб меню було поверх інших елементів */
 }
 
-header .dropdown a {
+.dropdown.show {
     display: block;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-    text-align: center;
 }
 
-header .dropdown a:hover {
-    background-color: #6b462d;
+.dropdown a {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
 }
+
+.dropdown a:hover {
+    background: #6b462d;
+}
+
+/* === Додатковий відступ, щоб контент не заходив під хедер === */
+main {
+  padding-top: 80px;
+}
+
 
 /* Menu button hover toggle */
 header .menu-btn:hover + .dropdown,
@@ -81,37 +107,74 @@ header .dropdown:hover {
 }
 
 /* Category title */
-.category-title {
-    background-color: #5b3521;
-    text-align: center;
-    padding: 20px 0;
-    font-size: 24px;
-    font-weight: bold;
+/* Фон — повна ширина і висота 250px */
+.category-block {
+    width: 100%;
+    height: 250px;
+    background-color: #753e21;
+    display: flex;
+    justify-content: center; /* центрує всередині */
+    align-items: center;
 }
+
+/* Контейнер із зображенням */
+.category-title {
+    position: relative;
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 16px; /* опціонально */
+}
+
+/* Зображення по ширині контейнера */
+.category-title img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Текст по центру зображення */
+.category-title .category-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    white-space: nowrap;
+}
+
 
 /* Dish grid */
 .dish-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 /* Dish card */
 .dish-card {
-    display: flex;
+    display: flex; /* для внутрішнього вмісту */
     background-color: #432a21;
     border-radius: 8px;
     overflow: hidden;
     padding: 10px;
     gap: 15px;
+
+    width: 450px;      
+    height: 200px;     
 }
 
+
+
 .dish-card img {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     object-fit: cover;
     border-radius: 5px;
 }
@@ -124,24 +187,24 @@ header .dropdown:hover {
 
 .dish-info h3 {
     margin: 0;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: bold;
 }
 
 .dish-info .weight {
-    font-size: 14px;
+    font-size: 19px;
     color: #d1a77a;
 }
 
 .dish-info .price {
     font-weight: bold;
     margin-top: 5px;
-    font-size: 16px;
+    font-size: 21px;
 }
 
 .dish-info p {
     margin: 5px 0 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Footer */
@@ -150,26 +213,37 @@ footer {
     padding: 20px;
     background-color: #432a21;
 }
+
+@media screen and (max-width: 700px) {
+    header .logo-container {
+        display: none; /* ховаємо кнопку */
+    }
+}
 </style>
 </head>
 <body>
 
-<header>
+<header id="mainHeader">
     <div class="logo-container">
-        <a href="/rif-caffe/"><img src="/images/mif.png" alt="Лого"></a>
+        <a href="/rif-caffe/"><img src="images/mif.png" alt="Лого"></a>
         <span><a href="/rif-caffe/">Монастирська кав’ярня-пекарня</a></span>
     </div>
-    <div>
-        <button class="menu-btn">Меню</button>
+    <div class ="menu-container">
+        <button id="menuBtn" class="menu-btn">Меню ⮟</button>
         <div class="dropdown">
             {% for s in sections %}
-            <a href="{{ url_for('menu_category', category=s) }}">{{ s }}</a>
+                <a href="{{ url_for('menu_category', category=s) }}">{{ s }}</a>
             {% endfor %}
         </div>
     </div>
 </header>
 
-<div class="category-title">{{ category }}</div>
+<div class="category-block">
+    <div class="category-title">
+        <img src="{{ back_photos[sections.index(category)] }}" alt="{{ category }}">
+        <div class="category-text">{{ category }}</div>
+    </div>
+</div>
 
 <main>
     <div class="dish-grid">
@@ -178,7 +252,6 @@ footer {
             <img src="{{ dish.icon_path }}" alt="{{ dish['назва_їжі'] }}">
             <div class="dish-info">
                 <h3>{{ dish['назва_їжі'] }}</h3>
-                <span class="weight">({{ dish.get('вага', '') }})</span>
                 <span class="price">{{ dish['ціна'] }} грн</span>
                 <p>{{ dish['опис_інгредієнтів'] }}</p>
             </div>
@@ -187,9 +260,7 @@ footer {
     </div>
 </main>
 
-<footer>
-    <a href="/rif-caffe/">⬅ На головну</a>
-</footer>
+<script src="js/index.js"></script>
 
 </body>
 </html>
