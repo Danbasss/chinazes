@@ -1,4 +1,5 @@
 from flask import Flask, render_template, send_from_directory, abort, json
+import os
 
 app = Flask(__name__, template_folder='')
 
@@ -51,7 +52,7 @@ def menu_category(category):
     return render_template('menu.html', category=matched, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
 
 def load_menu():
-    with open('menu.json', 'r', encoding='utf-8') as f:
+    with open( os.path.dirname(__file__) + '\\menu.json', 'r', encoding='utf-8') as f:
         return json.load(f)
 
 if __name__ == '__main__':
