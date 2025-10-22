@@ -7,54 +7,10 @@
 <link rel="stylesheet" href="../../css/style.css">
 <base href="/rif-caffe/">
 <style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #3b2213;
-    color: #fff;
-}
-
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px 20px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  transition: background-color 0.1s ease, backdrop-filter 0.1s ease;
-  background-color: transparent;
-  backdrop-filter: none;
-}
-
-header.scrolled {
-  background-color: rgba(28, 28, 28, 1); /* непрозорий темний фон */
-  backdrop-filter: blur(6px);
-}
-
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.logo-container img {
-    height: 40px;
-}
-
-.logo-container a, header .logo-container span {
-    color: #f5b76b;
-    font-size: 20px;
-    font-weight: bold;
-    text-decoration: none;
-}
-
+/* ---------- Menu section ---------- */
 .menu-container {
-    position: relative; /* важливо! робить контейнер точкою відліку для absolute меню */
-    display: inline-block; /* щоб ширина відповідала кнопці */
+    position: relative; 
+    display: inline-block;
 }
 
 .menu-btn {
@@ -67,16 +23,16 @@ header.scrolled {
     position: relative;
 }
 
-/* === DROPDOWN === */
+/* ---------- Dropdown section ---------- */
 .dropdown {
     display: none;
     position: absolute;
-    top: 100%;    /* прямо під кнопкою */
-    left: 0;      /* вирівнювання лівого краю меню по кнопці */
+    top: 100%;   
+    left: 0;     
     background: #1c1c1c;
-    min-width: 160px; /* мінімальна ширина випадаючого списку */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.2); /* легка тінь */
-    z-index: 1000;   /* щоб меню було поверх інших елементів */
+    min-width: 160px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    z-index: 1000;   
 }
 
 .dropdown.show {
@@ -94,39 +50,39 @@ header.scrolled {
     background: #6b462d;
 }
 
-/* === Додатковий відступ, щоб контент не заходив під хедер === */
+
 main {
   padding-top: 80px;
 }
 
 
 /* Menu button hover toggle */
-header .menu-btn:hover + .dropdown,
+/* header .menu-btn:hover + .dropdown,
 header .dropdown:hover {
     display: block;
-}
+} */
 
-/* Category title */
-/* Фон — повна ширина і висота 250px */
+/* Фон та назва меню */
+/* ---------- Category section ---------- */
 .category-block {
     width: 100%;
     height: 250px;
     background-color: #753e21;
     display: flex;
-    justify-content: center; /* центрує всередині */
+    justify-content: center;
     align-items: center;
 }
 
-/* Контейнер із зображенням */
+/* Контейнер з позицією */
 .category-title {
     position: relative;
     width: 70%;
     height: 100%;
     overflow: hidden;
-    border-radius: 16px; /* опціонально */
+    border-radius: 16px;
 }
 
-/* Зображення по ширині контейнера */
+/* Зображення контейнера */
 .category-title img {
     width: 100%;
     height: 100%;
@@ -134,7 +90,7 @@ header .dropdown:hover {
     display: block;
 }
 
-/* Текст по центру зображення */
+/* Текст позиції */
 .category-title .category-text {
     position: absolute;
     top: 50%;
@@ -150,6 +106,7 @@ header .dropdown:hover {
 
 
 /* Dish grid */
+/* ---------- Dish section ---------- */
 .dish-grid {
     display: flex;
     flex-direction: column;
@@ -159,7 +116,7 @@ header .dropdown:hover {
 
 /* Dish card */
 .dish-card {
-    display: flex; /* для внутрішнього вмісту */
+    display: flex;
     background-color: #432a21;
     border-radius: 8px;
     overflow: hidden;
@@ -169,8 +126,6 @@ header .dropdown:hover {
     width: 450px;      
     height: 200px;     
 }
-
-
 
 .dish-card img {
     width: 200px;
@@ -207,18 +162,14 @@ header .dropdown:hover {
     font-size: 16px;
 }
 
-/* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #432a21;
-}
-
+/* ---------- Footer ---------- */
 @media screen and (max-width: 700px) {
     header .logo-container {
         display: none; /* ховаємо кнопку */
     }
 }
+
+
 </style>
 </head>
 <body>
