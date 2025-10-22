@@ -43,13 +43,56 @@ header.scrolled {
     font-weight: bold;
     text-decoration: none;
 }
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #3b2213;
+  color: #fff;
+}
+
+
+header .search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+
+header .search-box input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #333;
+  padding: 5px;
+  width: 140px;
+  font-size: 14px;
+}
+
+header .search-box button {
+  background: #ffcc66;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+header .search-box button:hover {
+  background: #e0b754;
+}
+
 
 /* ---------- Hero section ---------- */
 .hero {
   background-image: url("../images/BACKGROUND.png");
   background-size: cover;
   background-position: center;
-  height: 200px;
+  height: 300px;
   position: relative;
 }
 
@@ -127,13 +170,34 @@ footer a {
   text-decoration: none;
 }
 
-footer .socials img {
-  width: 26px;
-  height: 26px;
-  margin: 5px;
-  filter: brightness(0) invert(1);
-  transition: 0.3s;
+footer .socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;              /* Відстань між іконками */
+  margin-top: 15px;
+  padding: 10px 0;
 }
+
+footer .socials a img {
+  width: 40px;            /* Розмір іконки */
+  height: 40px;
+  border-radius: 50%;     /* Зробить їх округлими */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+footer .socials a img:hover {
+  transform: scale(1.1);  /* Трохи збільшується при наведенні */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4); /* Легке підсвічування */
+}
+
+footer {
+  background-color: #2a1a0f;  /* або інший колір */
+  padding: 20px 0;
+  color: #fff;
+  text-align: center;
+}
+
 
 footer .socials img:hover {
   transform: scale(1.2);
