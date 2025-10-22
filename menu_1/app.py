@@ -3,7 +3,7 @@ from flask import Flask, render_template, send_from_directory, abort, json
 app = Flask(__name__, template_folder='')
 
 CATEGORIES = None
-# шляхи до заднінх фонів
+# шляхи до задніх фонів
 BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png', 
          'BACKGROUNDBURGER.png', 'BACKGROUNDSHAWARMA.png', 
          'BACKGROUNDSHAWARMA.png', 'BACKGROUNDSALAD.png', 

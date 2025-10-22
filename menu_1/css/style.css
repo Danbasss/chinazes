@@ -61,7 +61,6 @@ header.scrolled {
   background-color: rgba(28, 28, 28, 1);
   backdrop-filter: blur(6px);
 }
-/* ---------- Header  end ---------- */
 
 .logo-container {
     display: flex;
@@ -79,6 +78,7 @@ header.scrolled {
     font-weight: bold;
     text-decoration: none;
 }
+/* ---------- Header end ---------- */
 
 /* ---------- index.html section ---------- */
 /* ---------- Hero section ---------- */
@@ -297,6 +297,7 @@ header .dropdown:hover {
     margin: 5px 0 0;
     font-size: 16px;
 }
+/* ---------- menu.html section ---------- */
 
 /* ---------- Footer ---------- */
 footer {
