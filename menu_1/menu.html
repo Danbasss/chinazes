@@ -249,11 +249,11 @@ footer {
     <div class="dish-grid">
         {% for dish in dishes %}
         <div class="dish-card">
-            <img src="{{ dish.icon_path }}" alt="{{ dish['назва_їжі'] }}">
+            <img src="{{ dish.icon_path }}" alt="{{ dish['name'] }}">
             <div class="dish-info">
-                <h3>{{ dish['назва_їжі'] }}</h3>
-                <span class="price">{{ dish['ціна'] }} грн</span>
-                <p>{{ dish['опис_інгредієнтів'] }}</p>
+                <h3>{{ dish['name'] }}</h3>
+                <span class="price">{{ dish['price'] }} грн</span>
+                <p>{{ dish['ingredients'] }}</p>
             </div>
         </div>
         {% endfor %}

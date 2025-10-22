@@ -2,13 +2,8 @@ from flask import Flask, render_template, send_from_directory, abort, json
 
 app = Flask(__name__, template_folder='')
 
-# --- Список категорій меню ---
-CATEGORIES = [
-    'Піца', 'Круасани', 'Бургер', 'Лаваш',
-    'Салати', 'Перші страви', 'Вареники', 'Гофра',
-    'Гарніри', 'Десерти та напої'
-]
-
+CATEGORIES = None
+# шляхи до заднінх фонів
 BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png', 
          'BACKGROUNDBURGER.png', 'BACKGROUNDSHAWARMA.png', 
          'BACKGROUNDSHAWARMA.png', 'BACKGROUNDSALAD.png', 
@@ -16,12 +11,12 @@ BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png',
          'BACKGROUNDGOFRA.png', 'BACKGROUNDSIDEDISHES.png', 
          'BACKGROUNDDESSERTS.png']
 
-# --- Головна сторінка ---
+# Головна сторінка
 @app.route('/rif-caffe/')
 def index():
     return render_template('index.html', categories=CATEGORIES)
 
-# --- Віддаємо статичні файли (щоб не міняти HTML) ---
+# Підключення статичних файлів
 @app.route('/rif-caffe/css/<path:filename>')
 def serve_css(filename):
     return send_from_directory('css', filename)
@@ -34,21 +29,20 @@ def serve_images(filename):
 def serve_static(filename):
     return send_from_directory('', filename)
 
-# --- Сторінка категорії ---
+# Сторінка категорії
 @app.route('/rif-caffe/menu/<category>/')
 def menu_category(category):
     data = load_menu()
-
-    # Знаходимо категорію без урахування регістру
+    # Знаходимо відповідну категорію без урахування регістру
     matched = next((k for k in data.keys() if k.lower() == category.lower()), None)
     if not matched:
         abort(404)
 
     dishes = data[matched]
 
-    # Перетворюємо шлях до іконки на фактичний
+    # Повний шлях до іконок
     for dish in dishes:
-        dish['icon_path'] = f"images/{dish['назва_іконки_до_неї']}"
+        dish['icon_path'] = f"images/{dish['icon_path']}"
 
     back_photo_true_path = list(BACK_PHOTOS)
     for n in range(len(back_photo_true_path)):
@@ -61,4 +55,6 @@ def load_menu():
         return json.load(f)
 
 if __name__ == '__main__':
+    data = load_menu()
+    CATEGORIES = list(k for k in data.keys())
     app.run(debug=True)
