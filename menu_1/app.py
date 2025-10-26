@@ -1,8 +1,8 @@
-from flask import Flask, render_template, send_from_directory, abort, json
+from flask import Flask, render_template, send_from_directory, abort, json, g
 import os
+import sqlite3
 
-app = Flask(__name__, template_folder='')
-
+DATABASE = os.path.dirname(__file__) + '\\database.db'
 CATEGORIES = None
 # шляхи до задніх фонів
 BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png', 
@@ -11,6 +11,12 @@ BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png',
          'BACKGROUNDSOUP.png', 'BACKGROUNDDUMPLING.png', 
          'BACKGROUNDGOFRA.png', 'BACKGROUNDSIDEDISHES.png', 
          'BACKGROUNDDESSERTS.png']
+LANGUAGE = "ua"      #за замовчуванням
+
+app = Flask(__name__, template_folder='')
+
+conn = sqlite3.connect(DATABASE, check_same_thread=False)
+cursor = conn.cursor()
 
 # Головна сторінка
 @app.route('/rif-caffe/')
@@ -33,13 +39,12 @@ def serve_static(filename):
 # Сторінка категорії
 @app.route('/rif-caffe/menu/<category>/')
 def menu_category(category):
-    data = load_menu()
-    # Знаходимо відповідну категорію без урахування регістру
-    matched = next((k for k in data.keys() if k.lower() == category.lower()), None)
-    if not matched:
-        abort(404)
-
-    dishes = data[matched]
+    cursor.execute( f'''SELECT {depends_on_lang("section")}, {depends_on_lang("name")}, price, discount, {depends_on_lang("ingredients")}, icon_path
+                                 FROM food_menu
+                                 WHERE section_ua = "{category}" ''')
+    
+    data = {"section"}    
+    for row in cursor.fetchall():
 
     # Повний шлях до іконок
     for dish in dishes:
@@ -49,13 +54,14 @@ def menu_category(category):
     for n in range(len(back_photo_true_path)):
         back_photo_true_path[n] = f"images/{back_photo_true_path[n]}"
 
-    return render_template('menu.html', category=matched, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
+    return render_template('menu.html', category, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
 
-def load_menu():
-    with open( os.path.dirname(__file__) + '\\menu.json', 'r', encoding='utf-8') as f:
-        return json.load(f)
+def depends_on_lang(needed_col):
+    needed_col += "_" + LANGUAGE
+    return needed_col
 
 if __name__ == '__main__':
-    data = load_menu()
-    CATEGORIES = list(k for k in data.keys())
+    cursor.execute(f"SELECT DISTINCT {depends_on_lang("section")} FROM food_menu") 
+    CATEGORIES = cursor.fetchall()
+    CATEGORIES = [row[0] for row in CATEGORIES]
     app.run(debug=True)

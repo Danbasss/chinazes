@@ -25,7 +25,7 @@
     <h3>Виберіть розділ меню</h3>
     <div class="menu-grid">
       {% for cat in categories %}
-        <form action="menu/{{ cat|lower }}/" method="get">
+        <form action="menu/{{ cat }}/" method="get">
           <button type="submit">{{ cat }}</button>
         </form>
       {% endfor %}
