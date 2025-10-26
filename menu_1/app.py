@@ -39,22 +39,19 @@ def serve_static(filename):
 # Сторінка категорії
 @app.route('/rif-caffe/menu/<category>/')
 def menu_category(category):
-    cursor.execute( f'''SELECT {depends_on_lang("section")}, {depends_on_lang("name")}, price, discount, {depends_on_lang("ingredients")}, icon_path
+    cursor.execute( f'''SELECT {depends_on_lang("name")}, price, discount, {depends_on_lang("ingredients")}, icon_path
                                  FROM food_menu
                                  WHERE section_ua = "{category}" ''')
     
-    data = {"section"}    
+    dishes = []
     for row in cursor.fetchall():
-
-    # Повний шлях до іконок
-    for dish in dishes:
-        dish['icon_path'] = f"images/{dish['icon_path']}"
-
+        dishes.append({'name': row[0], 'price': row[1], "ingredients": row[2], "icon_path": f"images/{row[3]}"})
+    print(dishes)
     back_photo_true_path = list(BACK_PHOTOS)
     for n in range(len(back_photo_true_path)):
         back_photo_true_path[n] = f"images/{back_photo_true_path[n]}"
 
-    return render_template('menu.html', category, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
+    return render_template('menu.html', dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
 
 def depends_on_lang(needed_col):
     needed_col += "_" + LANGUAGE
