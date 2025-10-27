@@ -121,3 +121,7 @@ output_frames/
 # Large directories
 # ------------------------------------------
 model/
+
+#optional
+menu_1/images/*
+le_goat_2/images/*
