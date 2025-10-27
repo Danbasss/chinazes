@@ -124,4 +124,5 @@ model/
 
 #optional
 menu_1/images/*
+!menu_1/images/mif.png
 le_goat_2/images/*
