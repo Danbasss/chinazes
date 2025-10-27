@@ -24,24 +24,6 @@ header {
   color: #fff;
 }
 
-header .search-box {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  border-radius: 20px;
-  padding: 5px 10px;
-}
-
-header .search-box input {
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #333;
-  padding: 5px;
-  width: 140px;
-  font-size: 14px;
-}
-
 header.scrolled {
   background-color: rgba(28, 28, 28, 1);
   backdrop-filter: blur(6px);
@@ -63,6 +45,23 @@ header.scrolled {
     font-weight: bold;
     text-decoration: none;
 }
+/* translate button */
+header button.translate-btn {
+  color: white;
+  font-size: 14px; 
+  align-items: center; 
+  position: relative;
+  display: inline-block;
+  background-color: #5b3521;
+  border: none;
+  box-sizing: border-box;
+
+  padding: 8px 12px;
+  width: 180px;
+  height: 50px;
+  border-radius: 8px;
+}
+
 /* ---------- Header end ---------- */
 
 /* ---------- index.html section ---------- */
@@ -109,7 +108,7 @@ main h3 {
   margin: 0 auto;
 }
 
-button {
+button.a_section {
   background-color: #a96b3c;
   border: none;
   color: white;
@@ -128,6 +127,9 @@ button:hover {
   background-color: #d4a373;
   transform: scale(1.05);
 }
+/* ---------- language button ---------- */
+
+
 /* ---------- index.html end ---------- */
 
 /* ---------- menu.html section ---------- */
@@ -145,6 +147,8 @@ button:hover {
     color: #fff;
     font-weight: bold;
     position: relative;
+    box-sizing: border-box;
+
     width: 180px;
     height: 50px;
 }
@@ -282,7 +286,7 @@ header .dropdown:hover {
     margin: 5px 0 0;
     font-size: 16px;
 }
-/* ---------- menu.html section ---------- */
+/* ---------- menu.html end ---------- */
 
 /* ---------- Footer ---------- */
 footer {

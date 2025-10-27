@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{{ category }} — Монастирська кав’ярня-пекарня</title>
+<title data-translate="choosed home page"></title>
 <link rel="stylesheet" href="../../css/style.css">
 <base href="/rif-caffe/">
 </head>
@@ -12,15 +12,15 @@
 <header id="mainHeader">
     <div class="logo-container">
         <a href="/rif-caffe/"><img src="images/mif.png" alt="Лого"></a>
-        <span><a href="/rif-caffe/">Монастирська кав’ярня-пекарня</a></span>
+        <span><a href="/rif-caffe/" data-translate="monastyrska cafe-bakery"></a></span>
     </div>
     <div class ="menu-container">
-        <button id="menuBtn" class="menu-btn">Меню ⮟</button>
+        <button class="menu-btn" data-translate="menu_btn"></button>
         <div class="dropdown">
             {% for s in sections %}
                 <a href="{{ url_for('menu_category', category=s) }}">{{ s }}</a>
             {% endfor %}
-        </div>
+        </div>   
     </div>
 </header>
 
@@ -38,7 +38,7 @@
             <img src="{{ dish.icon_path }}" alt="{{ dish['name'] }}">
             <div class="dish-info">
                 <h3>{{ dish['name'] }}</h3>
-                <span class="price">{{ dish['price'] }} грн</span>
+                <span class="price">{{ dish['price'] }} <span data-translate="uah"></span></span>
                 <p>{{ dish['ingredients'] }}</p>
             </div>
         </div>

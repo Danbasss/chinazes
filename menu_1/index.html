@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Монастирська кав’ярня-пекарня</title>
+  <title data-translate="home page"></title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -11,22 +11,25 @@
   <header id="mainHeader">
     <div class="logo-container">
       <a href="/rif-caffe/"><img src="images/mif.png" alt="Лого"></a>
-      <span><a href="/rif-caffe/">Монастирська кав’ярня-пекарня</a></span>
+      <span><a href="/rif-caffe/" data-translate="monastyrska cafe-bakery"></a></span>
+    </div>
+    <div>
+      <button class="translate-btn" onclick="setLanguage('', '/rif-caffe/')" data-translate="change_lan"></button>
     </div>
   </header>
 
   <section class="hero">
     <div class="overlay">
-      <h2>Меню</h2>
+      <h2 data-translate="menu">Меню</h2>
     </div>
   </section>
 
   <main>
-    <h3>Виберіть розділ меню</h3>
+    <h3 data-translate="select a menu section"></h3>
     <div class="menu-grid">
       {% for cat in categories %}
         <form action="menu/{{ cat }}/" method="get">
-          <button type="submit">{{ cat }}</button>
+          <button class = "a_section" type="submit">{{ cat }}</button>
         </form>
       {% endfor %}
     </div>
@@ -34,9 +37,9 @@
 
   <footer>
     <div class="info">
-      <p><strong>Графік роботи:</strong></p>
-      <p>Понеділок-Субота 9:00-20:00<br>Неділя 9:00-21:00</p>
-      <p>Телефон: <a href="tel:+380888554071">088 855 4071</a></p>
+      <p data-translate="work schedule"><strong></strong></p>
+      <p data-translate="opening info"></p>
+      <p data-translate="phone"></p>
     </div>
 
    <div class="socials">
@@ -50,7 +53,6 @@
    </div>
   </footer>
 
-  <script src="js/index.js"></script>
-
+  <script defer src="js/index.js"></script>
 </body>
 </html>
