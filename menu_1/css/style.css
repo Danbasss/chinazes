@@ -67,7 +67,7 @@ header button.translate-btn {
 /* ---------- index.html section ---------- */
 /* ---------- Hero section ---------- */
 .hero {
-  background-image: url("../images/BACKGROUND.png");
+  background-image: url("https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649631/BACKGROUND_lpbhyg.png");
   background-size: cover;
   background-position: center;
   height: 300px;

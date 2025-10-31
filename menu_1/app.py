@@ -5,12 +5,16 @@ import sqlite3
 DATABASE = os.path.dirname(__file__) + '\\database.db'
 CATEGORIES = None
 # шляхи до задніх фонів
-BACK_PHOTOS = ['BACKGROUNDPIZZA.png', 'BACKGROUNDCROISSANT.png', 
-         'BACKGROUNDBURGER.png', 'BACKGROUNDSHAWARMA.png', 
-         'BACKGROUNDSHAWARMA.png', 'BACKGROUNDSALAD.png', 
-         'BACKGROUNDSOUP.png', 'BACKGROUNDDUMPLING.png', 
-         'BACKGROUNDGOFRA.png', 'BACKGROUNDSIDEDISHES.png', 
-         'BACKGROUNDDESSERTS.png']
+BACK_PHOTOS = ['https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649636/BACKGROUNDPIZZA_ndynaj.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649632/BACKGROUNDCROISSANT_ib7r5n.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649631/BACKGROUNDBURGER_qsobw3.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649638/BACKGROUNDSHAWARMA_lkwsu8.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649640/BACKGROUNDSALAD_u6jhpd.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649640/BACKGROUNDSOUP_b1ht4n.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649633/BACKGROUNDDUMPLING_wmjfre.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649634/BACKGROUNDGOFRA_rqaxb5.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649639/BACKGROUNDSIDEDISHES_r7b1ka.png', 
+         'https://res.cloudinary.com/dwzalnlpv/image/upload/v1761649632/BACKGROUNDDESSERTS_fefhf1.png']
 LANGUAGE = "ua"      #за замовчуванням
 
 app = Flask(__name__, template_folder='')
@@ -50,11 +54,12 @@ def menu_category(category):
     
     dishes = []
     for row in cursor.fetchall():
-        dishes.append({'name': row[0], 'price': row[1], "discount": row[2], "ingredients": row[3], "icon_path": f"images/{row[4]}"})   
+        dishes.append({'name': row[0], 'price': row[1], "discount": row[2], "ingredients": row[3], "icon_path": row[4]})
 
     back_photo_true_path = list(BACK_PHOTOS)
     for n in range(len(back_photo_true_path)):
-        back_photo_true_path[n] = f"images/{back_photo_true_path[n]}"
+        back_photo_true_path[n] = back_photo_true_path[n]
+
 
     return render_template('menu.html', category=category, dishes=dishes, sections=CATEGORIES, back_photos=back_photo_true_path)
 
