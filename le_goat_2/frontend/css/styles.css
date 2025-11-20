@@ -1,0 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../images/lebron-dunk.jpg"); 
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    color: #fff;
+    margin: 0;
+}
+
+/* -------- Header -------- */
+Header {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    padding: 15px 30px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* Лого + заголовок в одному рядку */
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    margin-right: 12px;
+}
+
+h1 {
+    color: orange;
+    margin: 0;
+}
+
+/* Меню */
+nav {
+    display: flex;
+    flex-wrap: wrap;      /* дозволяє переноситися */
+    gap: 12px;            /* замість марджинів */
+}
+
+
+nav a {
+    color: rgb(225, 180, 95);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ---- MAIN ---- */
+main {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    margin: 40px;
+    border-radius: 12px;
+}

@@ -1,0 +1,1 @@
+document.getElementById("quiz").innerText = "Тут будуть квізи";

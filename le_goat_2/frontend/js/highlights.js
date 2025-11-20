@@ -1,0 +1,1 @@
+document.getElementById("highlights").innerHTML = "Відео будут тут";
