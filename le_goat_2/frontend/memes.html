@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <title>Меми</title>
-<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/memes.css" />
 </head>
 <body>
 <h1>Галерея мемів</h1>
@@ -15,6 +15,14 @@
 <input type="file" id="memeFile" />
 <button type="submit">Відправити</button>
 </form>
+
+
+<div class="masonry" id="memeGrid"></div>
+
+<!-- Fullscreen Viewer -->
+<div id="viewer" class="viewer hidden">
+    <img id="viewerImg" src="">
+</div>
 
 
 <script src="js/main.js"></script>
