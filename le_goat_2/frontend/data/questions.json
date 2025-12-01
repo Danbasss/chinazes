@@ -1,0 +1,182 @@
+[
+  {
+    "question": "У якому році Леброн Джеймс був обраний на драфті НБА?",
+    "answers": [
+      { "text": "2001", "correct": false },
+      { "text": "2003", "correct": true },
+      { "text": "2005", "correct": false },
+      { "text": "1999", "correct": false }
+    ]
+  },
+  {
+    "question": "За яку команду Леброн почав свою кар'єру в НБА?",
+    "answers": [
+      { "text": "Miami Heat", "correct": false },
+      { "text": "LA Lakers", "correct": false },
+      { "text": "Cleveland Cavaliers", "correct": true },
+      { "text": "Chicago Bulls", "correct": false }
+    ]
+  },
+  {
+    "question": "Скільки чемпіонських титулів НБА виграв Леброн (станом на 2024)?",
+    "answers": [
+      { "text": "3", "correct": false },
+      { "text": "4", "correct": true },
+      { "text": "5", "correct": false },
+      { "text": "6", "correct": false }
+    ]
+  },
+  {
+    "question": "В якій школі навчався Леброн Джеймс?",
+    "answers": [
+      { "text": "St. Vincent-St. Mary", "correct": true },
+      { "text": "Oak Hill Academy", "correct": false },
+      { "text": "Lower Merion", "correct": false },
+      { "text": "Sierra Canyon", "correct": false }
+    ]
+  },
+  {
+    "question": "Кого обігнав Леброн, ставши найкращим бомбардиром в історії НБА?",
+    "answers": [
+      { "text": "Майкла Джордана", "correct": false },
+      { "text": "Кобі Браянта", "correct": false },
+      { "text": "Карла Мелоуна", "correct": false },
+      { "text": "Каріма Абдул-Джаббара", "correct": true }
+    ]
+  },
+  {
+    "question": "Яке прізвисько має Леброн?",
+    "answers": [
+      { "text": "Black Mamba", "correct": false },
+      { "text": "King James", "correct": true },
+      { "text": "The Answer", "correct": false },
+      { "text": "Magic", "correct": false }
+    ]
+  },
+  {
+    "question": "Проти якої команди Леброн здійснив свій знаменитий 'The Block' у фіналі 2016 року?",
+    "answers": [
+      { "text": "Boston Celtics", "correct": false },
+      { "text": "San Antonio Spurs", "correct": false },
+      { "text": "Golden State Warriors", "correct": true },
+      { "text": "Miami Heat", "correct": false }
+    ]
+  },
+  {
+    "question": "Під яким номером Леброн грав більшу частину своєї кар'єри?",
+    "answers": [
+      { "text": "23", "correct": true },
+      { "text": "6", "correct": false },
+      { "text": "32", "correct": false },
+      { "text": "45", "correct": false }
+    ]
+  },
+  {
+    "question": "У якому місті народився Леброн?",
+    "answers": [
+      { "text": "Клівленд, Огайо", "correct": false },
+      { "text": "Акрон, Огайо", "correct": true },
+      { "text": "Чикаго, Іллінойс", "correct": false },
+      { "text": "Маямі, Флорида", "correct": false }
+    ]
+  },
+  {
+    "question": "Скільки разів Леброн ставав MVP фіналу НБА (станом на 2024)?",
+    "answers": [
+      { "text": "2", "correct": false },
+      { "text": "3", "correct": false },
+      { "text": "4", "correct": true },
+      { "text": "5", "correct": false }
+    ]
+  },
+  {
+    "question": "Як звати старшого сина Леброна?",
+    "answers": [
+      { "text": "Bryce", "correct": false },
+      { "text": "Bronny", "correct": true },
+      { "text": "Zhuri", "correct": false },
+      { "text": "Bron", "correct": false }
+    ]
+  },
+  {
+    "question": "З яким рахунком 'Клівленд' програвав у серії фіналу 2016 року перед тим, як виграти?",
+    "answers": [
+      { "text": "0-2", "correct": false },
+      { "text": "1-3", "correct": true },
+      { "text": "2-3", "correct": false },
+      { "text": "0-3", "correct": false }
+    ]
+  },
+  {
+    "question": "У якому році Леброн перейшов до 'Маямі Хіт' (The Decision)?",
+    "answers": [
+      { "text": "2008", "correct": false },
+      { "text": "2010", "correct": true },
+      { "text": "2012", "correct": false },
+      { "text": "2009", "correct": false }
+    ]
+  },
+  {
+    "question": "Яке друге ім'я (middle name) у Леброна?",
+    "answers": [
+      { "text": "Raymone", "correct": true },
+      { "text": "Arthur", "correct": false },
+      { "text": "Edward", "correct": false },
+      { "text": "Kobe", "correct": false }
+    ]
+  },
+  {
+    "question": "Скільки олімпійських золотих медалей у Леброна (до Парижа 2024 включно)?",
+    "answers": [
+      { "text": "1", "correct": false },
+      { "text": "2", "correct": false },
+      { "text": "3", "correct": true },
+      { "text": "0", "correct": false }
+    ]
+  },
+  {
+    "question": "Проти якої команди Леброн виграв свій перший титул у 2012 році?",
+    "answers": [
+      { "text": "San Antonio Spurs", "correct": false },
+      { "text": "Oklahoma City Thunder", "correct": true },
+      { "text": "Dallas Mavericks", "correct": false },
+      { "text": "Boston Celtics", "correct": false }
+    ]
+  },
+  {
+    "question": "Який бренд взуття підписав з Леброном довічний контракт?",
+    "answers": [
+      { "text": "Adidas", "correct": false },
+      { "text": "Under Armour", "correct": false },
+      { "text": "Jordan", "correct": false },
+      { "text": "Nike", "correct": true }
+    ]
+  },
+  {
+    "question": "Як називається фільм, у якому Леброн зіграв головну роль у 2021 році?",
+    "answers": [
+      { "text": "Space Jam: A New Legacy", "correct": true },
+      { "text": "Trainwreck", "correct": false },
+      { "text": "Hustle", "correct": false },
+      { "text": "Like Mike", "correct": false }
+    ]
+  },
+  {
+    "question": "В якому році Леброн виграв чемпіонат з Lakers (в 'Бульбашці')?",
+    "answers": [
+      { "text": "2019", "correct": false },
+      { "text": "2020", "correct": true },
+      { "text": "2021", "correct": false },
+      { "text": "2018", "correct": false }
+    ]
+  },
+  {
+    "question": "Скільки сезонів поспіль Леброн виходив у фінал НБА (з 2011 по 2018)?",
+    "answers": [
+      { "text": "6", "correct": false },
+      { "text": "7", "correct": false },
+      { "text": "8", "correct": true },
+      { "text": "9", "correct": false }
+    ]
+  }
+]

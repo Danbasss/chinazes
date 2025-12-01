@@ -1,14 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
-<meta charset="UTF-8" />
-<title>Квізи</title>
-<link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeBron James Quiz</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body>
-<h1>Квізи</h1>
-<div id="quiz"></div>
-<script src="js/main.js"></script>
-<script src="js/quiz.js"></script>
+
+    <div class="quiz-container">
+        <button id="top-restart-btn" title="Почати знову">↻</button>
+
+        <nav style="text-align: left;">
+            <a href="/">На Головну</a>
+        </nav>
+
+        <h1>LeBron James Quiz</h1>
+        
+        <div id="start-screen" class="quiz-section">
+            <h2>Налаштування гри</h2>
+            <div class="settings-control">
+                <div class="input-group">
+                    <label for="question-count">Оберіть кількість питань:</label>
+                    
+                    <select id="question-count">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                
+                <div id="difficulty-display">
+                    Складність: <span id="difficulty-label" class="diff-medium">СЕРЕДНІЙ</span>
+                </div>
+            </div>
+            <button id="start-btn" class="btn-control">Старт</button>
+        </div>
+        
+        <div id="quiz-wrapper" style="display: none;">
+            <div class="score-display">Питання: <span id="current-q">1</span>/20</div>
+            
+            <div class="question-section">
+                <div id="question">Завантаження питань...</div>
+            </div>
+
+            <div id="answer-buttons" class="btn-grid">
+                </div>
+
+            <div class="controls">
+                <div id="score-counter">Рахунок: 0</div>
+                <button id="next-btn">Наступне питання</button>
+            </div>
+        </div>
+
+        <div id="result-screen" style="display: none;">
+            <h2>Квіз завершено!</h2>
+            <p id="final-score" style="font-size: 1.5rem; margin: 20px 0;"></p>
+            <button id="restart-btn" onclick="location.reload()">Спробувати ще раз</button>
+        </div>
+    </div>
+
+    <script src="js/quiz.js"></script>
 </body>
 </html>
