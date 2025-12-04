@@ -24,3 +24,4 @@ function openViewer(src) {
 viewer.addEventListener("click", () => {
     viewer.classList.add("hidden");
 });
+

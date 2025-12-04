@@ -9,12 +9,10 @@
 <h1>Галерея мемів</h1>
 <div id="memes"></div>
 
-
-<h3>Надіслати мем</h3>
-<form id="memeForm">
-<input type="file" id="memeFile" />
-<button type="submit">Відправити</button>
-</form>
+<a href="/" class="home-btn">
+    <img src="/images/logo_white.png" alt="Logo">
+    <span class="tooltip">На головну</span>
+</a>
 
 
 <div class="masonry" id="memeGrid"></div>
@@ -24,8 +22,14 @@
     <img id="viewerImg" src="">
 </div>
 
+<form id="memeForm">
+<h3>Надіслати мем</h3>
+<input type="file" id="memeFile" />
+<button type="submit">Відправити</button>
+</form>
 
 <script src="js/main.js"></script>
 <script src="js/memes.js"></script>
+
 </body>
 </html>
