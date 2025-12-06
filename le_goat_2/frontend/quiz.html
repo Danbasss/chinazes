@@ -9,6 +9,12 @@
 </head>
 <body>
 
+    <a href="/" class="home-btn">
+    <img src="/images/logo_white.png" alt="Logo">
+    <span class="tooltip">На головну</span>
+    </a>
+
+
     <div class="quiz-container">
         <button id="top-restart-btn" title="Почати знову">↻</button>
 
@@ -61,6 +67,13 @@
             <button id="restart-btn" onclick="location.reload()">Спробувати ще раз</button>
         </div>
     </div>
+
+        <!-- Відео-реакції -->
+    <div id="video-reaction">
+        <video id="video-correct" class="reaction hidden" src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765006023/happy_xvfnbj.mp4"></video>
+        <video id="video-wrong" class="reaction hidden" src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765006023/sad_uvbp4v.mp4"></video>
+    </div>
+
 
     <script src="js/quiz.js"></script>
 </body>

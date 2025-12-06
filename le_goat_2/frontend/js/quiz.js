@@ -124,9 +124,12 @@ function selectAnswer(e) {
         selectedBtn.classList.add('correct');
         score++;
         scoreCounter.innerText = `Рахунок: ${score}`;
+        playReaction(true);
     } else {
         selectedBtn.classList.add('wrong');
+        playReaction(false);
     }
+
 
     Array.from(answerButtonsElement.children).forEach(button => {
         if (button.dataset.correct === "true") {
@@ -160,3 +163,29 @@ nextButton.addEventListener('click', () => {
 });
 
 loadQuestions();
+
+// ===== ВІДЕО РЕАКЦІЇ =====
+
+const videoCorrect = document.getElementById("video-correct");
+const videoWrong = document.getElementById("video-wrong");
+
+function playReaction(isCorrect) {
+    const video = isCorrect ? videoCorrect : videoWrong;
+
+    // ховаємо обидва
+    videoCorrect.classList.add("hidden");
+    videoWrong.classList.add("hidden");
+
+    // перезапускаємо
+    video.currentTime = 0;
+    video.classList.remove("hidden");
+    video.classList.add("show");
+    video.play();
+
+    // автоматичне сховання
+    setTimeout(() => {
+        video.pause();
+        video.classList.add("hidden");
+        video.classList.remove("show");
+    }, 3000); // 3 секунди
+}
