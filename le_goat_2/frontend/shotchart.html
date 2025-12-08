@@ -2,76 +2,67 @@
 <html lang="uk">
 <head>
   <meta charset="utf-8" />
-  <title>Shot Chart — D3 — 14 zones</title>
-
+  <title>Shot Chart — Optimized Grid</title>
   <link rel="stylesheet" href="css/shotchart.css" />
   <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
+  
+  <header class="mainHeader">
+      <a href="/" class="logo-title">
+          <img src="images/logo_orange.png" alt="Logo" class="logo">
+          <h1>LeBron James Fan Site</h1>
+      </a>
+  
+      <div class="menu-wrapper">
+          <button id="menu-toggle" class="menu-btn">Меню</button>
+          
+          <nav id="main-nav" class="nav-menu">
+              <a href="/bio">Біографія</a>
+              <a href="/stats">Статистика</a>
+              <a href="/highlights">Хайлайти</a>
+              <a href="/memes">Меми</a>
+              <a href="/quiz">Вікторина</a>
+              <a href="/shotchart">Візуалізація</a>
+          </nav>
+      </div>
+  </header>
+
   <div class="page">
     <h1>Візуалізація кидків</h1>
-
-    <a href="/" class="home-btn">
-        <img src="/images/logo_white.png" alt="Logo">
-        <span class="tooltip">На головну</span>
-    </a>
-
     <div class="video-row">
         <div class="video-box">
             <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040782/visual_1_pzcfi2.mp4" autoplay loop muted playsinline></video>
         </div>
-
         <div class="video-box">
             <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040783/visual_2_zccrur.mp4" autoplay loop muted playsinline></video>
         </div>
     </div>
 
-
-
-
     <div id="chart-wrap">
-      <!-- Inline SVG court with 14 zone paths (ids match JS) -->
-      <svg id="court" viewBox="0 0 500 470" xmlns="http://www.w3.org/2000/svg">
-        <!-- court lines -->
-        <rect x="0" y="0" width="500" height="470" fill="#07121a" stroke="#222" stroke-width="2"/>
-        <path d="M30,300 A220,220 0 0 1 470,300" fill="none" stroke="#2b3a40" stroke-width="3"/>
-        <line x1="30" y1="300" x2="30" y2="470" stroke="#2b3a40" stroke-width="3"/>
-        <line x1="470" y1="300" x2="470" y2="470" stroke="#2b3a40" stroke-width="3"/>
-        <circle cx="250" cy="180" r="60" fill="none" stroke="#2b3a40" stroke-width="3"/>
-        <rect x="150" y="0" width="200" height="190" fill="none" stroke="#2b3a40" stroke-width="3"/>
-        <circle cx="250" cy="30" r="7" fill="none" stroke="#2b3a40" stroke-width="3"/>
-        <line x1="220" y1="40" x2="280" y2="40" stroke="#2b3a40" stroke-width="3"/>
-
-        <!-- 14 zones (paths & circle). IDs used by JS -->
-        <!-- 3PT zones -->
-        <path id="zone-left-corner-3"    class="zone" d="M0,470 L0,300 L30,300 L30,470 Z" />
-        <path id="zone-left-wing-3"      class="zone" d="M30,300 A220,220 0 0 1 180,190 L180,470 L30,470 Z" />
-        <path id="zone-center-3"         class="zone" d="M180,190 A220,220 0 0 1 320,190 L320,470 L180,470 Z" />
-        <path id="zone-right-wing-3"     class="zone" d="M320,190 A220,220 0 0 1 470,300 L470,470 L320,470 Z" />
-        <path id="zone-right-corner-3"   class="zone" d="M470,300 L470,470 L500,470 L500,300 Z" />
-
-        <!-- mid-range / wings / center -->
-        <path id="zone-left-long-mid"    class="zone" d="M150,190 L150,300 A120,120 0 0 0 180,190 Z" />
-        <path id="zone-left-short-mid"   class="zone" d="M150,190 L150,120 A60,60 0 0 0 250,180 L180,190 Z" />
-        <path id="zone-center-long-mid"  class="zone" d="M180,190 L320,190 A120,120 0 0 1 350,300 L150,300 A120,120 0 0 1 180,190 Z" />
-        <path id="zone-center-short-mid" class="zone" d="M190,140 A60,60 0 0 1 310,140 L310,180 L190,180 Z" />
-        <path id="zone-right-short-mid"  class="zone" d="M350,120 L350,190 L320,190 L310,180 A60,60 0 0 1 350,120 Z" />
-        <path id="zone-right-long-mid"   class="zone" d="M350,190 A120,120 0 0 0 380,300 L350,300 Z" />
-
-        <!-- paint & restricted -->
-        <path id="zone-paint-left"       class="zone" d="M150,0 L150,190 L250,190 L250,0 Z" />
-        <path id="zone-paint-right"      class="zone" d="M250,0 L250,190 L350,190 L350,0 Z" />
-        <path id="zone-restricted"       class="zone" d="M210,0 A40,40 0 0 1 290,0 L290,40 L210,40 Z" />
-
-      </svg>
+      <div class="svg-container">
+          <svg id="court" viewBox="0 0 500 470" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="500" height="470" fill="none" stroke="#333" stroke-width="2"/>
+            <g id="grid-layer"></g>
+            <g id="court-lines-overlay" pointer-events="none">
+                <path d="M30,0 L30,140 A220,220 0 0 1 470,140 L470,0" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                <rect x="170" y="0" width="160" height="190" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                <circle cx="250" cy="190" r="60" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                <circle cx="250" cy="40" r="7.5" fill="none" stroke="#fff" stroke-width="2"/>
+                <line x1="220" y1="47.5" x2="280" y2="47.5" stroke="#fff" stroke-width="2"/>
+            </g>
+          </svg>
+      </div>
     </div>
 
-    <div id="legend" class="legend"></div>
+    <div id="legend" class="legend">
+        <span>Cold</span>
+        <div class="gradient-bar"></div>
+        <span>Hot</span>
+    </div>
   </div>
 
-  <!-- Tooltip container (absolute) -->
   <div id="tooltip" class="tooltip hidden"></div>
-
   <script src="js/shotchart.js"></script>
 </body>
 </html>

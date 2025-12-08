@@ -6,29 +6,36 @@
         <link rel="stylesheet" href="css/memes.css" />
     </head>
 <body>
+
+<header class="mainHeader">
+    <a href="/" class="logo-title">
+        <img src="images/logo_orange.png" alt="Logo" class="logo">
+        <h1>LeBron James Fan Site</h1>
+    </a>
+
+    <div class="menu-wrapper">
+        <button id="menu-toggle" class="menu-btn">Меню</button>
+        
+        <nav id="main-nav" class="nav-menu">
+            <a href="/bio">Біографія</a>
+            <a href="/stats">Статистика</a>
+            <a href="/highlights">Хайлайти</a>
+            <a href="/memes">Меми</a>
+            <a href="/quiz">Вікторина</a>
+            <a href="/shotchart">Візуалізація</a>
+        </nav>
+    </div>
+</header>
+
 <h1>Галерея мемів</h1>
 <div id="memes"></div>
 
-<a href="/" class="home-btn">
-    <img src="/images/logo_white.png" alt="Logo">
-    <span class="tooltip">На головну</span>
-</a>
-
-
 <div class="masonry" id="memeGrid"></div>
 
-<!-- Fullscreen Viewer -->
 <div id="viewer" class="viewer hidden">
     <img id="viewerImg" src="">
 </div>
 
-<form id="memeForm">
-    <h3>Надіслати мем</h3>
-    <input type="file" id="memeFile" />
-    <button type="submit">Відправити</button>
-</form>
-
-<script src="js/main.js"></script>
 <script src="js/memes.js"></script>
 
 </body>

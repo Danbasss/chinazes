@@ -11,7 +11,17 @@ body {
     margin: 0;
 }
 
-
+/* Анімація появи */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 .home-btn {
     position: fixed;
@@ -44,7 +54,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Tooltip */
 .tooltip {
     position: absolute;
     left: 80px;
@@ -66,8 +75,6 @@ body {
     transform: translateY(-50%) translateX(5px);
 }
 
-
-/* -------- Header -------- */
 Header {
     background: rgba(0, 0, 0, 0.6);
     width: 100%;
@@ -81,7 +88,6 @@ Header {
     align-items: center;
 }
 
-/* Лого + заголовок в одному рядку */
 .logo-title {
     display: flex;
     align-items: center;
@@ -101,8 +107,8 @@ h1 {
 /* Меню */
 nav {
     display: flex;
-    flex-wrap: wrap;      /* дозволяє переноситися */
-    gap: 12px;            /* замість марджинів */
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 
@@ -117,12 +123,10 @@ nav a:hover {
     text-decoration: underline;
 }
 
-/* ---- MAIN ---- */
-main {
+main, #highlights, #stats {
     background: rgba(0, 0, 0, 0.6);
     padding: 40px;
     margin: 40px;
     border-radius: 12px;
+    animation: fadeIn 0.5s ease-out;
 }
-
-

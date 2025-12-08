@@ -1,171 +1,152 @@
-// js/shotchart.js
-// D3 not strictly required here — але ми підключили d3 lib у HTML для можливого розширення.
-// У цьому скрипті використовуємо чистий JS + невеликі хелпери d3-like ( можна замінити повністю на d3 )
-
-// ---------- 1) DATA: 14 zones (LeBron career / league numbers) ----------
+// Дані статистики
 const zonesData = {
-  "zone-left-corner-3":     { name: "3 Point Corner Right",   player: 36.9, league: 38.8 },
-  "zone-left-wing-3":       { name: "3 Pointer Wing Right",   player: 33.8, league: 35.4 }, 
-  "zone-center-3":          { name: "3 Pointer Straight",     player: 35.0, league: 34.5 },
-  "zone-right-wing-3":      { name: "3 Pointer Wing Left",    player: 35.1, league: 35.3 },
-  "zone-right-corner-3":    { name: "3 Point Corner Left",    player: 39.6, league: 38.6 },
+  "zone-left-corner-3":     { name: "3 Point Corner Right",   player: 36.9, league: 38.8, volume: 150 },
+  "zone-left-wing-3":       { name: "3 Pointer Wing Right",   player: 33.8, league: 35.4, volume: 400 }, 
+  "zone-center-3":          { name: "3 Pointer Straight",     player: 35.0, league: 34.5, volume: 500 },
+  "zone-right-wing-3":      { name: "3 Pointer Wing Left",    player: 35.1, league: 35.3, volume: 420 },
+  "zone-right-corner-3":    { name: "3 Point Corner Left",    player: 39.6, league: 38.6, volume: 160 },
 
-  "zone-left-long-mid":     { name: "2P 15+ Feet Right Corner", player: 37.1, league: 40.0 },
-  "zone-left-short-mid":    { name: "2P 5-15 Feet Right Corner", player: 33.6, league: 39.6 },
+  "zone-left-long-mid":     { name: "2P 15+ Feet Right Corner", player: 37.1, league: 40.0, volume: 200 },
+  "zone-left-short-mid":    { name: "2P 5-15 Feet Right Corner", player: 33.6, league: 39.6, volume: 250 },
 
-  "zone-center-long-mid":   { name: "2P 15+ Feet Straight",    player: 39.0, league: 40.4 },
-  "zone-center-short-mid":  { name: "2P 5-15 Straight",       player: 41.6, league: 42.6 },
+  "zone-center-long-mid":   { name: "2P 15+ Feet Straight",    player: 39.0, league: 40.4, volume: 300 },
+  "zone-center-short-mid":  { name: "2P 5-15 Straight",       player: 41.6, league: 42.6, volume: 350 },
 
-  "zone-right-short-mid":   { name: "2P 5-15 Feet Left Corner", player: 39.5, league: 39.4 },
-  "zone-right-long-mid":    { name: "2P 15+ Feet Left Wing",  player: 39.6, league: 39.9 },
+  "zone-right-short-mid":   { name: "2P 5-15 Feet Left Corner", player: 39.5, league: 39.4, volume: 240 },
+  "zone-right-long-mid":    { name: "2P 15+ Feet Left Wing",  player: 39.6, league: 39.9, volume: 210 },
 
-  "zone-paint-left":        { name: "Paint Left",            player: 0, league: 0 }, // left/right paint not given individually; will use 'Under 5 Feet' for restricted
-  "zone-paint-right":       { name: "Paint Right",           player: 0, league: 0 },
+  "zone-paint-left":        { name: "Paint Left",            player: 62.0, league: 55.0, volume: 800 }, 
+  "zone-paint-right":       { name: "Paint Right",           player: 60.5, league: 55.0, volume: 750 },
 
-  "zone-restricted":        { name: "Under 5 Feet",         player: 67.2, league: 57.0 }
+  "zone-restricted":        { name: "Under 5 Feet",         player: 67.2, league: 57.0, volume: 1500 }
 };
 
-// NOTE: some paint zones were aggregated in the description — we set paint-left/right to 0 (no data)
-// you can merge restricted/paint or distribute values as you like. For visual purpose we'll paint restricted strongly.
+// Налаштування
+const width = 500;
+const height = 470;
+const svg = d3.select("#court");
+const gridLayer = svg.select("#grid-layer");
+const tooltip = d3.select("#tooltip");
 
-// ---------- 2) compute diffs and scale ----------
-const zoneKeys = Object.keys(zonesData);
+const rimX = 250;
+const rimY = 40; 
 
-// compute diffs
-let maxPos = 0, maxNeg = 0;
-zoneKeys.forEach(k => {
-  const z = zonesData[k];
-  if (z.player === 0 && z.league === 0) {
-    z.diff = 0;
-  } else {
-    z.diff = +(z.player - z.league); // positive => better than league
-    if (z.diff > maxPos) maxPos = z.diff;
-    if (z.diff < maxNeg) maxNeg = Math.abs(z.diff);
-  }
-});
+// Геометрія зон
+function getZone(x, y) {
+    const dx = x - rimX;
+    const dy = y - rimY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const angle = Math.atan2(dy, dx) * (180 / Math.PI); 
 
-// set minimal positive/negative to avoid division by zero
-maxPos = Math.max(maxPos, 0.1);
-maxNeg = Math.max(maxNeg, 0.1);
+    if (dist < 40) return "zone-restricted";
 
-// color mapping function: negative -> blue scale, positive -> orange scale
-function zoneColor(diff) {
-  // normalize
-  if (diff >= 0) {
-    const t = Math.min(diff / maxPos, 1); // 0..1
-    // use stronger opacity for larger diffs
-    const opacity = 0.25 + t * 0.75; // 0.25..1
-    // base orange gradient: use HSL for consistency
-    // darken as t increases
-    const hue = 30; // orange
-    const sat = 90; 
-    const light = 55 - t * 25; // 55 -> 30
-    return `hsla(${hue}, ${sat}%, ${light}%, ${opacity})`;
-  } else {
-    const t = Math.min(Math.abs(diff) / maxNeg, 1);
-    const opacity = 0.25 + t * 0.75;
-    const hue = 210; // blue
-    const sat = 85;
-    const light = 60 - t * 25; // 60 -> 35
-    return `hsla(${hue}, ${sat}%, ${light}%, ${opacity})`;
-  }
+    if (x > 170 && x < 330 && y < 190) {
+        return x < 250 ? "zone-paint-left" : "zone-paint-right";
+    }
+
+    const isCornerY = y < 140; 
+    
+    if (isCornerY && (x < 30)) return "zone-left-corner-3";
+    if (isCornerY && (x > 470)) return "zone-right-corner-3";
+
+    const isThree = dist > 237.5;
+
+    if (isThree) {
+        if (angle >= 70 && angle <= 110) return "zone-center-3";
+        return x < 250 ? "zone-left-wing-3" : "zone-right-wing-3";
+    }
+
+    const isLong = dist > 140; 
+
+    if (angle >= 70 && angle <= 110) {
+        return isLong ? "zone-center-long-mid" : "zone-center-short-mid";
+    }
+    if (x < 250) {
+        return isLong ? "zone-left-long-mid" : "zone-left-short-mid";
+    } else {
+        return isLong ? "zone-right-long-mid" : "zone-right-short-mid";
+    }
 }
 
-// ---------- 3) paint zones initially ----------
-zoneKeys.forEach(id => {
-  const el = document.getElementById(id);
-  const z = zonesData[id];
-  if (!el || !z) return;
+// Генерація сітки
+const cellSize = 15;
+const gridData = [];
 
-  // If paint-left/right are zero (no data), set subtle neutral tone
-  let fill = z.player === 0 && z.league === 0 ? 'rgba(255,255,255,0.02)' : zoneColor(z.diff);
-  el.style.fill = fill;
-  el.style.stroke = 'rgba(255,255,255,0.06)';
-});
+for (let x = 0; x < width; x += cellSize) {
+    for (let y = 0; y < height; y += cellSize) {
+        const cx = x + cellSize / 2;
+        const cy = y + cellSize / 2;
+        
+        if (y < 40 && Math.abs(x - 250) > 50) continue;
 
-// ---------- 4) tooltip & interaction ----------
-const tooltip = document.getElementById('tooltip');
-
-function showTooltip(evt, stats) {
-  const diff = (stats.player - stats.league);
-  const diffText = diff >= 0 ? `+${diff.toFixed(1)}%` : `${diff.toFixed(1)}%`;
-  let note = '';
-  if (Math.abs(diff) >= 1.0) {
-    note = diff > 0 ? ` (${diff.toFixed(1)}% higher)` : ` (${Math.abs(diff).toFixed(1)}% lower)`;
-  }
-
-  tooltip.innerHTML = `
-    <div style="font-weight:700; margin-bottom:6px">${stats.name}</div>
-    <div>Player: <b>${stats.player}%</b></div>
-    <div>League: <b>${stats.league}%</b></div>
-    <div style="margin-top:6px; color:#ddd">Diff: <b style="color:#fdb927">${diffText}</b>${note}</div>
-  `;
-
-  tooltip.classList.remove('hidden');
-
-  // position: keep tooltip inside window
-  const pageX = evt.pageX;
-  const pageY = evt.pageY;
-  const tw = tooltip.offsetWidth;
-  const th = tooltip.offsetHeight;
-  const margin = 12;
-
-  let left = pageX;
-  if (left + tw + margin > window.innerWidth) left = window.innerWidth - tw - margin;
-  let top = pageY - th - 20;
-  if (top < 10) top = pageY + 20;
-
-  tooltip.style.left = left + 'px';
-  tooltip.style.top = top + 'px';
+        const zoneKey = getZone(cx, cy);
+        gridData.push({ x, y, zoneKey });
+    }
 }
 
-function hideTooltip() {
-  tooltip.classList.add('hidden');
-}
+// Кольорова шкала
+const colorScale = d3.scaleLinear()
+    .domain([-10, 0, 10]) 
+    .range(["#3498db", "#1a202c", "#e74c3c"])
+    .clamp(true);
 
-// bind events
-zoneKeys.forEach(id => {
-  const el = document.getElementById(id);
-  const stats = zonesData[id];
-  if (!el || !stats) return;
+// Малювання
+const cells = gridLayer.selectAll("rect")
+    .data(gridData)
+    .enter().append("rect")
+    .attr("x", d => d.x)
+    .attr("y", d => d.y)
+    .attr("width", cellSize + 0.8)
+    .attr("height", cellSize + 0.8)
+    .attr("class", d => "grid-cell " + d.zoneKey)
+    .attr("fill", d => {
+        const data = zonesData[d.zoneKey];
+        if (!data || data.player === 0) return "rgba(255,255,255,0.02)";
+        return colorScale(data.player - data.league);
+    });
 
-  el.addEventListener('mousemove', (evt) => {
-    el.classList.add('hovered');
-    showTooltip(evt, stats);
-  });
-  el.addEventListener('mouseleave', () => {
-    el.classList.remove('hovered');
-    hideTooltip();
-  });
-  // optional click to lock tooltip (could be added)
-  el.addEventListener('click', (evt) => {
-    // simple pulse animation
-    el.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(1.02)', opacity: 0.98 }, { transform: 'scale(1)', opacity: 1 }], { duration: 260 });
-  });
+cells.on("mouseover", function(event, d) {
+    const data = zonesData[d.zoneKey];
+    if (!data || data.player === 0) return;
+
+    d3.selectAll(".grid-cell").style("opacity", 0.3);
+    d3.selectAll("." + d.zoneKey).style("opacity", 1);
+
+    const made = Math.round((data.player / 100) * data.volume);
+    
+    tooltip.classed("hidden", false)
+        .style("left", (event.pageX + 15) + "px")
+        .style("top", (event.pageY - 20) + "px")
+        .html(`
+            <div class="stat-row">Player: <span class="val">${data.player}%</span></div>
+            <div class="stat-row">League: <span class="val">${data.league}%</span></div>
+            <div class="stat-sub">${made} of ${data.volume}</div>
+        `);
+})
+.on("mousemove", function(event) {
+    tooltip
+        .style("left", (event.pageX + 15) + "px")
+        .style("top", (event.pageY - 20) + "px");
+})
+.on("mouseout", function() {
+    d3.selectAll(".grid-cell").style("opacity", 1);
+    tooltip.classed("hidden", true);
 });
 
-// ---------- 5) draw legend ----------
-(function renderLegend() {
-  const legend = document.getElementById('legend');
-  if (!legend) return;
+document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("main-nav");
 
-  // create five swatches from blue -> neutral -> orange
-  const grades = [-1.0, -0.2, 0, 0.2, 1.0]; // relative positions
-  legend.innerHTML = '';
-  const leftLabel = document.createElement('div'); leftLabel.textContent = 'fg% vs. league: '; leftLabel.style.marginRight='8px';
-  legend.appendChild(leftLabel);
+    if (menuBtn && navMenu) {
+        menuBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            navMenu.classList.toggle("active");
+        });
 
-  grades.forEach(g => {
-    const sw = document.createElement('span');
-    // approximate diff mapping: -1..1 scaled by maxNeg/maxPos
-    const sampleDiff = g * Math.max(maxPos, maxNeg);
-    sw.className = 'swatch';
-    sw.style.background = zoneColor(sampleDiff);
-    legend.appendChild(sw);
-  });
-
-  const league = document.createElement('div');
-  league.style.marginLeft='10px';
-  league.textContent = `league avg baseline`;
-  legend.appendChild(league);
-})();
+        document.addEventListener("click", (e) => {
+            if (!navMenu.contains(e.target) && !menuBtn.contains(e.target)) {
+                navMenu.classList.remove("active");
+            }
+        });
+    }
+});
