@@ -186,3 +186,122 @@ h1 {
     color: #000;
     padding-left: 25px;
 }
+
+
+.stats-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 15px;
+    color: white;
+    position: relative;
+}
+
+/* Головний заголовок */
+.stats-title {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px rgba(255, 165, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.5);
+    color: #ff9500;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* Новий контейнер: заголовок + перемикач в одному рядку */
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+/* Перемикач у правому куті */
+.table-mode {
+    background: rgba(0, 102, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 102, 255, 0.5);
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.table-mode a {
+    color: #aaa;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.table-mode a.active {
+    background: #0066ff;
+    color: white;
+    box-shadow: 0 0 15px rgba(0, 102, 255, 0.7);
+}
+
+.table-mode a:hover {
+    color: white;
+}
+
+/* Таблиця */
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    background: #1a1a1a;
+}
+
+.stats-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.stats-table th {
+    background: linear-gradient(90deg, #003366, #0066cc);
+    padding: 14px 8px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    text-align: center;
+}
+
+.stats-table td {
+    padding: 12px 8px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.stats-table tbody tr:nth-child(even) {
+    background: #222;
+}
+
+.stats-table tbody tr:hover {
+    background: #2a3f5f;
+    transform: scale(1.005);
+}
+
+/* Мобілка */
+@media (max-width: 768px) {
+    .stats-title {
+        font-size: 2.2rem;
+    }
+    
+    .stats-header {
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .table-mode {
+        order: -1;
+        margin-bottom: 20px;
+    }
+}
