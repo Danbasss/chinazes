@@ -22,8 +22,8 @@ const zonesData = {
 };
 
 // Налаштування
-const width = 500;
-const height = 470;
+const width = 495;
+const height = 465;
 const svg = d3.select("#court");
 const gridLayer = svg.select("#grid-layer");
 const tooltip = d3.select("#tooltip");

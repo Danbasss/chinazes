@@ -27,17 +27,10 @@
           </nav>
       </div>
   </header>
+    <div class="page">
+       <h1>Візуалізація кидків</h1>
 
-  <div class="page">
-    <h1>Візуалізація кидків</h1>
-    <div class="video-row">
-        <div class="video-box">
-            <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040782/visual_1_pzcfi2.mp4" autoplay loop muted playsinline></video>
-        </div>
-        <div class="video-box">
-            <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040783/visual_2_zccrur.mp4" autoplay loop muted playsinline></video>
-        </div>
-    </div>
+ 
 
     <div id="chart-wrap">
       <div class="svg-container">
@@ -45,7 +38,7 @@
             <rect x="0" y="0" width="500" height="470" fill="none" stroke="#333" stroke-width="2"/>
             <g id="grid-layer"></g>
             <g id="court-lines-overlay" pointer-events="none">
-                <path d="M30,0 L30,140 A220,220 0 0 1 470,140 L470,0" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                <path d="M30,140 L30,0 A220,220 0 0 1 470,0 L470,140" transform="rotate(180 250 70)" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
                 <rect x="170" y="0" width="160" height="190" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
                 <circle cx="250" cy="190" r="60" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
                 <circle cx="250" cy="40" r="7.5" fill="none" stroke="#fff" stroke-width="2"/>
@@ -60,7 +53,17 @@
         <div class="gradient-bar"></div>
         <span>Hot</span>
     </div>
+
+      <div class="video-row">
+          <div class="video-box">
+              <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040782/visual_1_pzcfi2.mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="video-box">
+              <video src="https://res.cloudinary.com/dwzalnlpv/video/upload/v1765040783/visual_2_zccrur.mp4" autoplay loop muted playsinline></video>
+          </div>
+    </div>
   </div>
+
 
   <div id="tooltip" class="tooltip hidden"></div>
   <script src="js/shotchart.js"></script>

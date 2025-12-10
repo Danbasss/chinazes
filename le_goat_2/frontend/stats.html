@@ -27,12 +27,11 @@
     </div>
 </header>
 
-<div class="stats-container">
 
-    <!-- Заголовок + перемикач у правому куті -->
     <div class="stats-header">
-        <h1 class="stats-title">СТАТИСТИКА ЗА КАР’ЄРУ</h1>
-        
+   
+        <h1 class="stats-title">Статистика за кар'єру</h1>
+
         <div class="table-mode">
             <a href="?table=regular" class="{% if selected_table != 'playoff' %}active{% endif %}">
                 Регулярний сезон
@@ -41,46 +40,50 @@
                 Плей-офф
             </a>
         </div>
+
     </div>
 
-    <div class="table-wrapper">
-        <table class="stats-table">
-            <thead>
-                <tr>
-                    <th>SEASON</th><th>TEAM</th><th>GP</th><th>GS</th><th>MIN</th>
-                    <th>FG</th><th>FG%</th><th>3PT</th><th>3PT%</th><th>FT</th><th>FT%</th>
-                    <th>OR</th><th>DR</th><th>REB</th><th>AST</th><th>BLK</th><th>STK</th><th>PF</th><th>TO</th><th>PTS</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in data %}
-                <tr>
-                    <td>{{ row.season }}</td>
-                    <td>{{ row.team }}</td>
-                    <td>{{ row.gp }}</td>
-                    <td>{{ row.gs }}</td>
-                    <td>{{ row.minutes }}</td>
-                    <td>{{ row.fg }}</td>
-                    <td>{{ row.fg_pct }}</td>
-                    <td>{{ row.three_pt }}</td>
-                    <td>{{ row.three_pt_pct }}</td>
-                    <td>{{ row.ft }}</td>
-                    <td>{{ row.ft_pct }}</td>
-                    <td>{{ row.ofens_reb }}</td>
-                    <td>{{ row.dr }}</td>
-                    <td>{{ row.reb }}</td>
-                    <td>{{ row.ast }}</td>
-                    <td>{{ row.blk }}</td>
-                    <td>{{ row.stl }}</td>
-                    <td>{{ row.pf }}</td>
-                    <td>{{ row.turnovers }}</td>
-                    <td>{{ row.pts }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div class="stats-container">
+
+    
+        <div class="table-wrapper">
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>SEASON</th><th>TEAM</th><th>GP</th><th>GS</th><th>MIN</th>
+                        <th>FG</th><th>FG%</th><th>3PT</th><th>3PT%</th><th>FT</th><th>FT%</th>
+                        <th>OR</th><th>DR</th><th>REB</th><th>AST</th><th>BLK</th><th>STK</th><th>PF</th><th>TO</th><th>PTS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr>
+                        <td>{{ row.season }}</td>
+                        <td>{{ row.team }}</td>
+                        <td>{{ row.gp }}</td>
+                        <td>{{ row.gs }}</td>
+                        <td>{{ row.minutes }}</td>
+                        <td>{{ row.fg }}</td>
+                        <td>{{ row.fg_pct }}</td>
+                        <td>{{ row.three_pt }}</td>
+                        <td>{{ row.three_pt_pct }}</td>
+                        <td>{{ row.ft }}</td>
+                        <td>{{ row.ft_pct }}</td>
+                        <td>{{ row.ofens_reb }}</td>
+                        <td>{{ row.dr }}</td>
+                        <td>{{ row.reb }}</td>
+                        <td>{{ row.ast }}</td>
+                        <td>{{ row.blk }}</td>
+                        <td>{{ row.stl }}</td>
+                        <td>{{ row.pf }}</td>
+                        <td>{{ row.turnovers }}</td>
+                        <td>{{ row.pts }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
 <script src="js/main.js"></script>
 <script src="js/stats.js"></script>
