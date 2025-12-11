@@ -27,32 +27,47 @@
     </div>
 </header>
 
-
     <div class="stats-header">
-   
         <h1 class="stats-title">Статистика за кар'єру</h1>
-
-        <div class="table-mode">
-            <a href="?table=regular" class="{% if selected_table != 'playoff' %}active{% endif %}">
-                Регулярний сезон
-            </a>
-            <a href="?table=playoff" class="{% if selected_table == 'playoff' %}active{% endif %}">
-                Плей-офф
-            </a>
-        </div>
-
     </div>
 
     <div class="stats-container">
+        
+        <div class="table-mode-container">
+            <div class="table-mode">
+                <a href="?table=regular" class="{% if selected_table != 'playoff' %}active{% endif %}">
+                    Регулярний сезон
+                </a>
+                <a href="?table=playoff" class="{% if selected_table == 'playoff' %}active{% endif %}">
+                    Плей-офф
+                </a>
+            </div>
+        </div>
 
-    
         <div class="table-wrapper">
             <table class="stats-table">
                 <thead>
                     <tr>
-                        <th>SEASON</th><th>TEAM</th><th>GP</th><th>GS</th><th>MIN</th>
-                        <th>FG</th><th>FG%</th><th>3PT</th><th>3PT%</th><th>FT</th><th>FT%</th>
-                        <th>OR</th><th>DR</th><th>REB</th><th>AST</th><th>BLK</th><th>STK</th><th>PF</th><th>TO</th><th>PTS</th>
+                        <th data-desc="Season">SEASON</th>
+                        <th data-desc="Team">TEAM</th>
+                        <th data-desc="Games Played">GP</th>
+                        <th data-desc="Games Started">GS</th>
+                        <th data-desc="Minutes Per Game">MIN</th>
+                        <th data-desc="Field Goals Made-Attempted Per Game">FG</th>
+                        <th data-desc="Field Goal Percentage">FG%</th>
+                        <th data-desc="3-Point Field Goals Made-Attempted Per Game">3PT</th>
+                        <th data-desc="3-Point Field Goal Percentage">3PT%</th>
+                        <th data-desc="Free Throws Made-Attempted Per Game">FT</th>
+                        <th data-desc="Free Throw Percentage">FT%</th>
+                        <th data-desc="Offensive Rebounds Per Game">OR</th>
+                        <th data-desc="Defensive Rebounds Per Game">DR</th>
+                        <th data-desc="Rebounds Per Game">REB</th>
+                        <th data-desc="Assists Per Game">AST</th>
+                        <th data-desc="Blocks Per Game">BLK</th>
+                        <th data-desc="Steals Per Game">STL</th>
+                        <th data-desc="Fouls Per Game">PF</th>
+                        <th data-desc="Turnovers Per Game">TO</th>
+                        <th data-desc="Points Per Game">PTS</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,6 +99,8 @@
             </table>
         </div>
     </div>
+
+    <div id="tooltip" class="tooltip hidden"></div>
 
 <script src="js/main.js"></script>
 <script src="js/stats.js"></script>

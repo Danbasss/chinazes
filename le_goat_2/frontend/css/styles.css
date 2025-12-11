@@ -184,7 +184,7 @@ main, #highlights, #stats {
     width: 350px;
     padding: 18px;
     background: rgba(0,0,0,0.45);
-    border-left: 4px solid #ff4d00; /* яскравіший баскетбольний колір */
+    border-left: 4px solid #ff4d00;
     border-radius: 10px;
     backdrop-filter: blur(6px);
     box-shadow: 0 0 12px rgba(255, 80, 0, 0.35);

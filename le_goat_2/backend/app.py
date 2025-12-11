@@ -1,16 +1,17 @@
 from flask import Flask, render_template, send_from_directory, request
-import os
 from flask_sqlalchemy import SQLAlchemy
 
-LANGUAGE = "ua"      #за замовчуванням
+is_database_working = False
 app = Flask(__name__, template_folder='../frontend')
 
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nigga911@localhost:5432/lebron'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+try:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:nigga911@localhost:5432/lebron'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    is_database_working = True
+except:
+    print("Unfortunately, database is not connected. Stats page isn't available")
 
 db = SQLAlchemy(app)
-
 
 class RegularSeasonStats(db.Model):
     __tablename__ = 'regular_season_stats'
@@ -133,27 +134,29 @@ def shotchart():
 
 @app.route('/stats')
 def stats():
-    table = request.args.get('table', 'regular')  
+    if(is_database_working):
+        table = request.args.get('table', 'regular')
 
-    if table == 'playoff':
-        model = PlayoffStats
-        title = "Плей-офф"
+        if table == 'playoff':
+            model = PlayoffStats
+            title = "Плей-офф"
+        else:
+            model = RegularSeasonStats
+            title = "Регулярний сезон"
+
+        data = model.query.order_by(model.season.desc()).all()
+
+        data_list = [row.__dict__ for row in data]
+        for row in data_list:
+            row.pop('_sa_instance_state', None)
+
+        return render_template(
+            'stats.html',
+            data=data_list,
+            selected_table=table
+        )
     else:
-        model = RegularSeasonStats
-        title = "Регулярний сезон"
-
-    data = model.query.order_by(model.season.desc()).all()
-
-
-    data_list = [row.__dict__ for row in data]
-    for row in data_list:
-        row.pop('_sa_instance_state', None)
-
-    return render_template(
-        'stats.html',
-        data=data_list,
-        selected_table=table
-    )
+        return "Somebody forgot to deploy database so no statistics from Lebron"
 
 if __name__ == '__main__':
     app.run(debug=True)

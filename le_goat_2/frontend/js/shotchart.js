@@ -1,4 +1,4 @@
-// Дані статистики
+// Статистика
 const zonesData = {
   "zone-left-corner-3":     { name: "3 Point Corner Right",   player: 36.9, league: 38.8, volume: 150 },
   "zone-left-wing-3":       { name: "3 Pointer Wing Right",   player: 33.8, league: 35.4, volume: 400 }, 
@@ -28,14 +28,15 @@ const svg = d3.select("#court");
 const gridLayer = svg.select("#grid-layer");
 const tooltip = d3.select("#tooltip");
 
-const rimX = 250;
-const rimY = 40; 
+const rimX = 248;
+const rimY = 38; 
 
 // Геометрія зон
 function getZone(x, y) {
     const dx = x - rimX;
     const dy = y - rimY;
     const dist = Math.sqrt(dx*dx + dy*dy);
+    console.log(x, y, dist)
     const angle = Math.atan2(dy, dx) * (180 / Math.PI); 
 
     if (dist < 40) return "zone-restricted";
@@ -77,7 +78,7 @@ for (let x = 0; x < width; x += cellSize) {
         const cx = x + cellSize / 2;
         const cy = y + cellSize / 2;
         
-        if (y < 40 && Math.abs(x - 250) > 50) continue;
+        if (y < 0 && Math.abs(x - 250) > 50) continue;
 
         const zoneKey = getZone(cx, cy);
         gridData.push({ x, y, zoneKey });

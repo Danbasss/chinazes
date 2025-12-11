@@ -11,7 +11,7 @@ body {
     margin: 0;
 }
 
-/* --- Анімація появи --- */
+/* Анімація появи */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -59,18 +59,22 @@ h1 {
     }
 }
 
-/* Контейнер статистики */
 .stats-container {
     background: rgba(0, 0, 0, 0.6);
     padding: 40px;
     margin: 40px auto;
-    max-width: 1000px;
+    max-width: 1400px;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     font-size: 1.1rem;
     line-height: 1.6;
     animation: fadeIn 0.8s ease-out;
     white-space: pre-wrap;
+    color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .mainHeader {
@@ -188,36 +192,31 @@ h1 {
 }
 
 
-.stats-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 30px 15px;
-    color: white;
-    position: relative;
-}
-
 /* Головний заголовок */
 .stats-title {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-shadow: 0 0 20px rgba(255, 165, 0, 0.8), 0 0 40px rgba(255, 100, 0, 0.5);
     color: #ff9500;
     font-weight: bold;
     letter-spacing: 2px;
 }
 
-/* Новий контейнер: заголовок + перемикач в одному рядку */
 .stats-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
 }
 
-/* Перемикач у правому куті */
+.table-mode-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Перемикач */
 .table-mode {
     background: rgba(0, 102, 255, 0.2);
     padding: 10px 20px;
@@ -227,6 +226,11 @@ h1 {
     font-weight: bold;
     font-size: 1.1rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    
+    display: inline-flex; 
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
 }
 
 .table-mode a {
@@ -235,6 +239,7 @@ h1 {
     padding: 8px 16px;
     border-radius: 30px;
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
 .table-mode a.active {
@@ -272,6 +277,7 @@ h1 {
     top: 0;
     z-index: 10;
     text-align: center;
+    cursor: help;
 }
 
 .stats-table td {
@@ -289,19 +295,27 @@ h1 {
     transform: scale(1.005);
 }
 
-/* Мобілка */
+#tooltip {
+  position: absolute;
+  background: rgba(15, 20, 25, 0.95);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  pointer-events: none;
+  border: 1px solid #444;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+  text-align: left;
+  z-index: 1000;
+  min-width: 150px;
+}
+
+.hidden {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .stats-title {
         font-size: 2.2rem;
-    }
-    
-    .stats-header {
-        justify-content: center;
-        flex-direction: column;
-    }
-    
-    .table-mode {
-        order: -1;
-        margin-bottom: 20px;
     }
 }
